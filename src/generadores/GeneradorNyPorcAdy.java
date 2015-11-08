@@ -9,10 +9,32 @@ public class GeneradorNyPorcAdy {
 	private GrafoNDNP g;
 	private int orden;
 	
-	public GeneradorNyPorcAdy(int nodos, double ady) throws GrafoImposibleException{
-		if (ady > 100 || ady < 0) throw new GrafoImposibleException("No se puede realizar este grafo");
-		g = new GrafoNDNP(nodos);
-		int limite = g.getMaxAristas(), aristasRest = (int) Math.floor(limite * ady);
+	public GeneradorNyPorcAdy(int cantNodos, double porcAdy){
+	
+		int cantAdy = (int) (cantNodos*porcAdy/100),
+				maxAristas;
+		Random r = new Random();
+		g = new GrafoNDNP(cantNodos);
+		maxAristas = g.getMaxAristas();
+		int arista= r.nextInt(maxAristas);
+		while(cantAdy>0){
+			if(!g.getArista(g.getFila(arista), g.getColumna(arista))){
+				g.setArista(g.getFila(arista), g.getColumna(arista));
+				cantAdy--;
+			}
+			arista = r.nextInt(maxAristas);
+		}
+	}
+	
+	
+	
+	
+	
+	/*
+	public GeneradorNyPorcAdy(int cantNodos, double porcAdy) throws GrafoImposibleException{
+		if (porcAdy > 100 || porcAdy < 0) throw new GrafoImposibleException("No se puede realizar este grafo");
+		g = new GrafoNDNP(cantNodos);
+		int limite = g.getMaxAristas(), aristasRest = (int) Math.floor(limite * porcAdy);
 		int test = this.randomBetween(0, limite);
 		while(aristasRest > 0) {
 			if(!g.getArista(g.getFila(test), g.getColumna(test))) {
@@ -22,7 +44,7 @@ public class GeneradorNyPorcAdy {
 			test = randomBetween(0, limite);
 		}
 	}
-
+*/
 	private int randomBetween(int a, int b) {
 		Random rnd = new Random();
 		return rnd.nextInt() % (b - a) + a;
