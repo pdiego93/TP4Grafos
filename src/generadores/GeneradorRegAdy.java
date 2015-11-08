@@ -46,6 +46,8 @@ public class GeneradorRegAdy {
 			int aux = g.getGrado(i);
 			if(aux < minG)
 				minG = aux;
+		
+			
 			if(aux > maxG)
 				maxG = aux;
 		}
