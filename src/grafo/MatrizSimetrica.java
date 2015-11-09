@@ -1,71 +1,77 @@
 package grafo;
 
 public class MatrizSimetrica {
-	private boolean [] ady;
-	private int orden;
-
-	public MatrizSimetrica(int ord) {
-		orden = ord;
-		int maxAristas = orden*(orden - 1)/2;
-		ady = new boolean[maxAristas];
-		for(int i = 0; i < maxAristas; i++)
-			ady[i] = false;
+	private boolean [] vector;
+	private int tam;
+	
+	public MatrizSimetrica(int n) {
+		tam = n;
+		vector = new boolean[n * (n - 1) / 2];
+	}
+	
+	public boolean getAdyacencia(int f, int c) {
+		return vector[this.getPos(f, c)];
 	}
 
-	private int conversion(int f, int c) {
-		if (f > c) {
-			int aux = f;
-			f = c;
-			c = aux;
+	public int getPos(int i, int j) {
+		int aux;
+		if (i > j) {
+			aux = i;
+			i = j;
+			j = aux;
 		}
-		int indice = f*orden+c-(f*f+3*f+2)/2;
-		indice = f ==c ? -1 : indice; 
-		return indice;
+		int pos = j - 1;
+		for (int k = 1; k <= i; k++)
+			pos += tam - k - 1;
+		
+		return pos;
 	}
-
-	public boolean getArista(int f, int c) {
-		return ady[conversion(f, c)];
-	}
-
-	public int getFila(int i) { 
-		return (int) (ady.length - (Math.ceil(1 + Math.sqrt(1+ 8 *(ady.length - i))))/ 2);
-	}
-
-	public int getColumna(int i) {
-		return orden - (ady.length - i - ((orden - getFila(i) - 1) * 2 - (orden - getFila(i) - 1))/2);
-	}
-
-	public void setArista(int f, int c){
-		ady[conversion(f, c)] = true;
-	}
-
-	public void borrarArista(int f, int c){
-		ady[conversion(f, c)] = false;
+	
+	public void setAdyacencia(int i, int j) {
+		vector[this.getPos(i, j)] = true;
 	}
 
 	protected int getOrden() {
-		return orden;
+		return tam;
 	}
 
 	public int getMaxAristas() {
-		return orden*(orden - 1)/2;
+		return tam*(tam - 1)/2;
 	}
 
 	public int cantidadAristas() {
 		int aristas = 0;
-		int maxAristas = orden*(orden - 1)/2;
+		int maxAristas = tam*(tam - 1)/2;
 		for(int i = 0; i < maxAristas; i++)
-			if(ady[i])
+			if(vector[i])
 				aristas++;
 		return aristas;
 	}
 
 	public int getGrado(int nodo) {
 		int grado = 0;
-		for(int i = nodo + 1; i < orden; i++)
-			if(ady[conversion(nodo, i)])
+		for(int i = nodo + 1; i < tam; i++)
+			if(vector[this.getPos(nodo, i)])
 				grado++;
 		return grado;
 	}
+	
+	public int[] getIndices(int pos) {
+		int k = 1;
+		while (pos >= tam - k) {
+			pos -= tam - k;
+			k++;
+		}
+		return new int[]{k-1,k+pos};
+	}
+	
+	public void setAdyacencia(int pos) {
+		vector[pos] = true;
+	}
+
+	public boolean getAdyacencia(int pos) {
+		return vector[pos];
+	}
 
 }
+
