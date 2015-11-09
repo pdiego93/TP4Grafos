@@ -55,7 +55,7 @@ public class Generador {
 			for(int j = 0; j < i; j++)
 				if(g.getAdyacencia(i, j))
 					cantArist --;
-			rand = r.nextInt(orden)-r.nextInt(i+1);//this.randomBetween(i + 1, orden);
+			rand = r.nextInt(orden)-r.nextInt(i+1);
 			rep = 0;
 			while(cantArist > 0 && rep < 100) {
 				if(!g.getAdyacencia(i, rand)) {
@@ -86,14 +86,14 @@ public class Generador {
 			for(int j = 0; j < i; j++)
 				if(g.getAdyacencia(i, j))
 				cantAristas --;
-			rand = r.nextInt(orden)- r.nextInt(i+i);
+			rand = r.nextInt((orden - i+1) + 1) + i+1;
 			rep = 0;
 			while(cantAristas > 0 && rep < 100) {
 				if(!g.getAdyacencia(i, rand)) {
 					g.setAdyacencia(i, rand);
 					cantAristas--;
 				}
-				rand = r.nextInt(orden)- r.nextInt(i+i);
+				rand = r.nextInt((orden - i+1) + 1) + i+1;
 				rep++;
 			}
 			if (rep > 100)

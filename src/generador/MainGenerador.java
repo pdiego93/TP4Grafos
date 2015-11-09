@@ -1,12 +1,14 @@
 package generador;
-import grafo.MatrizSimetrica;
+import grafo.*;
 
 public class MainGenerador {
 
 	public static void main(String[] args) {
 		MatrizSimetrica mat = new MatrizSimetrica(5);
-		
-
+		GrafoNDNP g = new GrafoNDNP(6);
+		Generador.regularGrado(g, 6, 2);
+		for(int i =0;i<g.getMaxAristas();i++)
+			System.out.println(g.getIndices(i)[0] + " " + g.getIndices(i)[1] + " " + g.getAdyacencia(g.getIndices(i)[0],g.getIndices(i)[1]));
 		
 		
 		

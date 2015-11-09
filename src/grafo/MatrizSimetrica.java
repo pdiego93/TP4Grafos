@@ -9,8 +9,8 @@ public class MatrizSimetrica {
 		vector = new boolean[n * (n - 1) / 2];
 	}
 	
-	public boolean getAdyacencia(int f, int c) {
-		return vector[this.getPos(f, c)];
+	public boolean getAdyacencia(int i, int j) {
+		return vector[this.getPos(i, j)];
 	}
 
 	public int getPos(int i, int j) {
@@ -23,7 +23,7 @@ public class MatrizSimetrica {
 		int pos = j - 1;
 		for (int k = 1; k <= i; k++)
 			pos += tam - k - 1;
-		
+		pos = i ==j ? -1 : pos; 
 		return pos;
 	}
 	
