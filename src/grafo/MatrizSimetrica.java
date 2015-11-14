@@ -1,7 +1,7 @@
 package grafo;
 
 public class MatrizSimetrica {
-	private boolean [] vector;
+	private boolean [] vector = null;
 	private int tam;
 	
 	public MatrizSimetrica(int n) {
@@ -28,10 +28,12 @@ public class MatrizSimetrica {
 	}
 	
 	public void setAdyacencia(int i, int j) {
+		System.out.println(i + " " + j);
 		vector[this.getPos(i, j)] = true;
+		//System.out.println(vector[this.getPos(i, j)]);
 	}
 
-	protected int getOrden() {
+	public int getOrden() {
 		return tam;
 	}
 
@@ -50,9 +52,11 @@ public class MatrizSimetrica {
 
 	public int getGrado(int nodo) {
 		int grado = 0;
-		for(int i = nodo + 1; i < tam; i++)
-			if(vector[this.getPos(nodo, i)])
-				grado++;
+		for(int i = 0; i < tam; i++)
+			if(i!=nodo)
+				if(vector[this.getPos(i, nodo)]){
+					grado++;
+				}
 		return grado;
 	}
 	
@@ -72,6 +76,14 @@ public class MatrizSimetrica {
 	public boolean getAdyacencia(int pos) {
 		return vector[pos];
 	}
-
+	
+	public boolean todosMismoGrado(int grado){
+		int i;
+		for(i=0; i<vector.length;i++)
+			if(this.getGrado(i)!=grado)
+				return false;
+		
+		return true;
+	}
 }
 

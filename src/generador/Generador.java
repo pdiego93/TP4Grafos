@@ -10,10 +10,10 @@ public class Generador {
 	
 	public static void aleatorioPorcAdy(GrafoNDNP g, int cantNodos, double porcAdy){
 		
-		int cantAdy = (int) (cantNodos*porcAdy/100),
+		int cantAdy = (int) (g.getMaxAristas()*porcAdy/100),
 				maxAristas;
 		Random r = new Random();
-		g = new GrafoNDNP(cantNodos);
+		System.out.println(cantAdy);
 		maxAristas = g.getMaxAristas();
 		int arista= r.nextInt(maxAristas);
 		while(cantAdy>0){
@@ -29,82 +29,75 @@ public class Generador {
 	public static void aleatorioProbAristas( GrafoNDNP g, int nodos, double prob) {
 		Random r = new Random();
 		double p;
-		g = new GrafoNDNP(nodos);
+		
 		for(int i = 0; i < nodos; i++) {
 			for(int j = i + 1; j < nodos; j++){
 				p = r.nextDouble();
-				if(p < prob)
+				if(p <= prob)
 					g.setAdyacencia(i, j);
 			}
 		}
 	}
 	
-	public static void regularPorcAdy(GrafoNDNP g, int nodos, double porc){
-		int grado = (int)Math.floor((nodos-1)*porc/2),
-			orden = g.getCantNodos(),
-			cantArist,
-			rand,
-			rep;
-		Random r = new Random();
-		if (grado >= nodos)
-			System.out.println("No se puede generar el grafo regular con el porcentaje:" + porc);
-		g = new GrafoNDNP(nodos);
-		orden = g.getCantNodos();
-		for(int i = 0; i < nodos; i++) {
-			cantArist = grado;
-			for(int j = 0; j < i; j++)
-				if(g.getAdyacencia(i, j))
-					cantArist --;
-			rand = r.nextInt(orden)-r.nextInt(i+1);
-			rep = 0;
-			while(cantArist > 0 && rep < 100) {
-				if(!g.getAdyacencia(i, rand)) {
-					g.setAdyacencia(i, rand);
-					cantArist--;
-				}
-				rand = r.nextInt(orden)-r.nextInt(i+1);
-				rep++;
-			}
-			if (rep > 100)
-				System.out.println("Hay mas de 100 repeticiones");
-		}
+	public static GrafoNDNP regularPorcAdy(int nodos, double porc){
+		int grado = (int) Math.floor((nodos)*porc/100);
+		
+		return regularGrado(nodos, grado);
 	}
 
-	public static void regularGrado(GrafoNDNP g, int nodos, int grado){
-		int cantAristas,
-			rand,
-			rep,
-			orden = nodos;
-		Random r = new Random();
-	
-		if (grado >= nodos)
+	public static GrafoNDNP regularGrado(int nodos, int grado){
+		int i=0,j, vueltas;
+		GrafoNDNP g = new GrafoNDNP(nodos);
+		
+		if (grado >= nodos || (nodos%2==1 && grado%2==1) || grado<1){
 			System.out.println("No se puede realizar el grafo con grado: " + grado);
-		g = new GrafoNDNP(nodos);
-		orden = g.getCantNodos();
-		for(int i = 0; i < nodos; i++) {
-			cantAristas = grado;
-			for(int j = 0; j < i; j++)
-				if(g.getAdyacencia(i, j))
-				cantAristas --;
-			rand = r.nextInt((orden - i+1) + 1) + i+1;
-			rep = 0;
-			while(cantAristas > 0 && rep < 100) {
-				if(!g.getAdyacencia(i, rand)) {
-					g.setAdyacencia(i, rand);
-					cantAristas--;
-				}
-				rand = r.nextInt((orden - i+1) + 1) + i+1;
-				rep++;
-			}
-			if (rep > 100)
-				System.out.println("Hay mas de 100 repeticiones");
+			return g;
 		}
+		
+		if((grado==1))
+			while(i<nodos){
+				g.setAdyacencia(i, i+1);
+				i+=2;
+			}
+		i=0;
+		
+		if(grado>=2){
+			g.setAdyacencia(i, nodos-1);
+			while(i<nodos-1){
+				g.setAdyacencia(i, i+1);
+				i++;
+			}
+			
+		i=0;
+		if(grado>2)
+			while(i<nodos){
+				j=i+grado;
+				vueltas =0;
+				while(g.getGrado(i)<grado && vueltas <nodos){
+					if(j>nodos-1)
+						j-=nodos;
+					if(g.getGrado(j)<grado && i != j)
+						g.setAdyacencia(i, j);
+					System.out.println("g: "+grado);
+					j+=grado;
+					vueltas++;
+				}
+			i++;
+			}
+		
+			
+		}
+		
+		if(!g.todosMismoGrado(grado))
+			System.out.println("No se puede generar un grafo regular");
+		g = new GrafoNDNP(nodos);
+		return g;
 	}
 	
 	public static void partito(GrafoNDNP g, int nodos, int part){
 		if (part >= nodos)
 			System.out.println("No se puede generar el grafo con "+ nodos +" nodos y " + part + " partes.");
-		g = new GrafoNDNP(nodos);
+		
 		for(int i = 0; i < nodos; i++)
 			for(int j = (i / part) * part + part; j < nodos; j++)
 				g.setAdyacencia(i, j);

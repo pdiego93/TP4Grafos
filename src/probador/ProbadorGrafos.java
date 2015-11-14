@@ -2,13 +2,13 @@ package probador;
 
 import java.io.*;
 
-public class ProbadorGrafos extends Archivos {
+public class ProbadorGrafos {
 	private int [][] aristas;
 	private String [] color;
 	private int cA, nodos;
 	
 	public ProbadorGrafos(String in, String out) {
-		super(new File(in), new File(out));
+		
 		FileReader archEnt = null, archSal = null;
 		BufferedReader lectorEnt = null, lectorSal;
 		try {
@@ -43,7 +43,7 @@ public class ProbadorGrafos extends Archivos {
 		}
 	}
 
-	@Override
+	
 	public void resolver() {
 		boolean casoCorrecto = true;
 		for(int i = 0; i < cA; i++)
