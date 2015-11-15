@@ -1,5 +1,8 @@
 package grafo;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class MatrizSimetrica {
 	private boolean [] vector = null;
 	private int tam;
@@ -85,5 +88,7 @@ public class MatrizSimetrica {
 		
 		return true;
 	}
+	
+	
 }
 

@@ -6,8 +6,5 @@ public class GrafoNDNP extends MatrizSimetrica{
 		super(nodos);
 	}
 
-	public int getCantNodos() {
-		return getOrden();
-	}
 
 }

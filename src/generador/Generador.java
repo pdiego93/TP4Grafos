@@ -46,52 +46,72 @@ public class Generador {
 	}
 
 	public static GrafoNDNP regularGrado(int nodos, int grado){
-		int i=0,j, vueltas;
+		
 		GrafoNDNP g = new GrafoNDNP(nodos);
 		
 		if (grado >= nodos || (nodos%2==1 && grado%2==1) || grado<1){
 			System.out.println("No se puede realizar el grafo con grado: " + grado);
 			return g;
 		}
-		
 		if((grado==1))
-			while(i<nodos){
-				g.setAdyacencia(i, i+1);
-				i+=2;
-			}
-		i=0;
+			genGrado1(g, nodos);
 		
 		if(grado>=2){
-			g.setAdyacencia(i, nodos-1);
-			while(i<nodos-1){
-				g.setAdyacencia(i, i+1);
-				i++;
-			}
+			genGrado2(g, nodos);
 			
-		i=0;
-		if(grado>2)
-			while(i<nodos){
-				j=i+grado;
-				vueltas =0;
-				while(g.getGrado(i)<grado && vueltas <nodos){
-					if(j>nodos-1)
-						j-=nodos;
-					if(g.getGrado(j)<grado && i != j)
-						g.setAdyacencia(i, j);
-					System.out.println("g: "+grado);
-					j+=grado;
-					vueltas++;
-				}
-			i++;
-			}
-		
-			
+			if(grado>2)
+				if(nodos%grado == 0)
+					genGradoMultiplo(g, nodos, grado);
+				else
+					genGradoMayor2(g, nodos, grado);
 		}
 		
 		if(!g.todosMismoGrado(grado))
 			System.out.println("No se puede generar un grafo regular");
 		g = new GrafoNDNP(nodos);
 		return g;
+	}
+	
+	private static void genGrado1(GrafoNDNP g, int nodos){
+		int i=0;
+		while(i<nodos){
+			g.setAdyacencia(i, i+1);
+			i+=2;
+		}
+	}
+	
+	private static void genGrado2(GrafoNDNP g, int nodos){
+		int i=0;
+		g.setAdyacencia(i, nodos-1);
+		while(i<nodos-1){
+			g.setAdyacencia(i, i+1);
+			i++;
+		}
+	}
+	
+	private static void genGradoMayor2(GrafoNDNP g, int nodos, int grado){
+		int i=0, j, vueltas;
+		while(i<nodos){
+			j=i+grado;
+			vueltas =0;
+			while(g.getGrado(i)<grado && vueltas <nodos){
+				if(j>nodos-1)
+					j-=nodos;
+				if(g.getGrado(j)<grado && i != j && !g.getAdyacencia(i, j))
+					g.setAdyacencia(i, j);
+				System.out.println("g: "+grado);
+				j+=grado;
+				vueltas++;
+			}
+		i++;
+		}
+		
+	}
+	
+	private static void genGradoMultiplo(GrafoNDNP g, int nodos, int grado){
+		int i=0, j, salto = nodos/grado;
+		genGrado1(g, nodos);
+		genGradoMayor2(g, nodos, grado-1);
 	}
 	
 	public static void partito(GrafoNDNP g, int nodos, int part){

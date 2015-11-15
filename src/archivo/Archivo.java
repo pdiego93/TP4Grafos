@@ -10,14 +10,14 @@ import grafo.GrafoNDNP;
 
 public class Archivo {
 	
-	public static void leer(GrafoNDNP g){
+	public static void leer(GrafoNDNP g, String ruta){
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
 		String data;
 		int orden, cantAristas, porcAdy, gMax, gMin;
 		try {
-			archivo = new File("Entrada//grafo.in");
+			archivo = new File(ruta);
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
 			String [] linea = br.readLine().split(" ");
@@ -38,7 +38,7 @@ public class Archivo {
 	}
 	
 	
-	public static void escribir(GrafoNDNP g) {
+	public static void escribir(GrafoNDNP g, String ruta) {
 		FileWriter fw;
 		PrintWriter pw = null;
 		int orden = g.getCantNodos(), 
@@ -57,7 +57,7 @@ public class Archivo {
 				gradoMax = aux;
 		}
 		try {
-			fw = new FileWriter("Entradas//grafo.in");
+			fw = new FileWriter(ruta);
 			pw = new PrintWriter(fw);
 			pw.println(orden + " " + cantAristas + " " + porc + " " + gradoMax + " " + gradoMin);
 			for(int i = 0; i < orden; i++)
