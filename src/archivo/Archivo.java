@@ -38,14 +38,15 @@ public class Archivo {
 	}
 	
 	
-	public static void escribir(GrafoNDNP g, String ruta) {
+	public static void escribir(GrafoNDNP g, String ruta, int [] colores) {
 		FileWriter fw;
 		PrintWriter pw = null;
-		int orden = g.getCantNodos(), 
+		int orden = g.getOrden(), 
 			cantAristas = g.cantidadAristas(), 
 			gradoMin = g.getGrado(0), 
 			gradoMax = g.getGrado(0),
-			aux;
+			aux, 
+			cantCol = colores.length;
 		
 		double porc = (g.cantidadAristas()/g.getMaxAristas())*100;
 		
@@ -59,7 +60,7 @@ public class Archivo {
 		try {
 			fw = new FileWriter(ruta);
 			pw = new PrintWriter(fw);
-			pw.println(orden + " " + cantAristas + " " + porc + " " + gradoMax + " " + gradoMin);
+			pw.println(orden +" " + cantCol + " " + cantAristas + " " + porc + " " + gradoMax + " " + gradoMin);
 			for(int i = 0; i < orden; i++)
 				for(int j = i + 1; j < orden; j++)
 					if (g.getAdyacencia(i, j))
