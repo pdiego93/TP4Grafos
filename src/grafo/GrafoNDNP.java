@@ -50,4 +50,25 @@ public class GrafoNDNP extends MatrizSimetrica{
 	public void setGradoMin(int gradoMin) {
 		this.gradoMin = gradoMin;
 	}
+	
+
+	public int secuencial(GrafoNDNP g){
+		Coloreo col = new Coloreo(g);
+		col.mezclar();
+		return col.colorear(g);
+	}
+	
+	public int welshPowell(GrafoNDNP g){
+		Coloreo col = new Coloreo(g);
+		col.mezclar();
+		col.ordenMayorAMenor();
+		return col.colorear(g);
+	}
+	
+	public int matula(GrafoNDNP g){
+		Coloreo col = new Coloreo(g);
+		col.mezclar();
+		col.ordenMenorAMayor();
+		return col.colorear(g);
+	}
 }

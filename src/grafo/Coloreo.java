@@ -12,6 +12,8 @@ public class Coloreo {
 			elementos[i][0]=i;
 			elementos[i][1]=g.getGrado(i);
 		}
+		
+		mat = getMatrizCopia(elementos);
 	}
 	
 	public int [][] getMatriz(){
@@ -38,7 +40,7 @@ public class Coloreo {
 		return colorear(mat, g);
 	}
 	
-	private int [][] getMatrizCopia(int [][] m){
+	public int [][] getMatrizCopia(int [][] m){
 		mat = new int [m.length][m[0].length];
 		for(int i=0; i<m.length; i++)
 			for(int j=0; j<m[0].length; j++)
@@ -47,7 +49,7 @@ public class Coloreo {
 		return mat;
 	}
 	
-	private static int colorear(int [][] elementos, GrafoNDNP g){
+	public int colorear(GrafoNDNP g){
 		int[] colores = new int [g.getOrden()];
 		int color;
 		elementos[0][3]=1;
@@ -80,54 +82,54 @@ public class Coloreo {
 		return cont;		
 	}
 	
-	private static void mezclar(int [][] v){
+	public void mezclar(){
 		Random rnd = new Random();
 		int aux;
-	    for (int i = 0; i < v.length; i++)
+	    for (int i = 0; i < mat.length; i++)
 	    {
 	      int index = rnd.nextInt(i + 1);
 	      
-	      aux = v[index][0];
-	      v[index][0] = v[i][0];
-	      v[i][0] = aux;
-	      aux = v[index][1];
-	      v[index][1] = v[i][1];
-	      v[i][1] = aux;
+	      aux = mat[index][0];
+	      mat[index][0] = mat[i][0];
+	      mat[i][0] = aux;
+	      aux = mat[index][1];
+	      mat[index][1] = mat[i][1];
+	      mat[i][1] = aux;
 	    }
 	}
 	
-	private static void ordenMayorAMenor(int [][] v){
+	public void ordenMayorAMenor(){
 		int i=0, f=1, aux;
-		while(i<v.length && f==1){
+		while(i<mat.length && f==1){
 			f=0;
-			for(int j=0; j<v.length-1; j++){
-				if(v[i][1]<v[j][1]){
+			for(int j=0; j<mat.length-1; j++){
+				if(mat[i][1]<mat[j][1]){
 					f=1;
-					aux = v[j][0];
-				      v[j][0] = v[i][0];
-				      v[i][0] = aux;
-				      aux = v[j][1];
-				      v[j][1] = v[i][1];
-				      v[i][1] = aux;
+					aux = mat[j][0];
+				      mat[j][0] = mat[i][0];
+				      mat[i][0] = aux;
+				      aux = mat[j][1];
+				      mat[j][1] = mat[i][1];
+				      mat[i][1] = aux;
 				}	
 			}
 			i++;
 		}
 	}
 	
-	private static void ordenMenorAMayor(int [][] v){
+	public void ordenMenorAMayor(){
 		int i=0, f=1, aux;
-		while(i<v.length && f==1){
+		while(i<mat.length && f==1){
 			f=0;
-			for(int j=0; j<v.length-1; j++){
-				if(v[i][1]>v[j][1]){
+			for(int j=0; j<mat.length-1; j++){
+				if(mat[i][1]>mat[j][1]){
 					f=1;
-					aux = v[j][0];
-				      v[j][0] = v[i][0];
-				      v[i][0] = aux;
-				      aux = v[j][1];
-				      v[j][1] = v[i][1];
-				      v[i][1] = aux;
+					aux = mat[j][0];
+				      mat[j][0] = mat[i][0];
+				      mat[i][0] = aux;
+				      aux = mat[j][1];
+				      mat[j][1] = mat[i][1];
+				      mat[i][1] = aux;
 				}	
 			}
 			i++;
