@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Coloreo {
 	private int [][] elementos;
+	private int [][] mat;
 	
 	public Coloreo(GrafoNDNP g){
 		elementos = new int [g.getOrden()][3];
@@ -14,31 +15,31 @@ public class Coloreo {
 	}
 	
 	public int [][] getMatriz(){
-		return elementos;
+		return mat;
 	}
 	
 	public int secuencial(GrafoNDNP g){
-		int [][] mat = getMatrizCopia(elementos);
+		mat = getMatrizCopia(elementos);
 		mezclar(mat);
 		return colorear(mat, g);
 	}
 	
 	public int welshPowell(GrafoNDNP g){
-		int [][] mat = getMatrizCopia(elementos);
+		mat = getMatrizCopia(elementos);
 		mezclar(mat);
 		ordenMenorAMayor(mat);
 		return colorear(mat, g);
 	}
 	
 	public int matula(GrafoNDNP g){
-		int [][] mat = getMatrizCopia(elementos);
+		mat = getMatrizCopia(elementos);
 		mezclar(mat);
 		ordenMayorAMenor(mat);
 		return colorear(mat, g);
 	}
 	
-	private static int [][] getMatrizCopia(int [][] m){
-		int [][] mat = new int [m.length][m[0].length];
+	private int [][] getMatrizCopia(int [][] m){
+		mat = new int [m.length][m[0].length];
 		for(int i=0; i<m.length; i++)
 			for(int j=0; j<m[0].length; j++)
 				mat[i][j] = m[i][j];
@@ -47,25 +48,33 @@ public class Coloreo {
 	}
 	
 	private static int colorear(int [][] elementos, GrafoNDNP g){
-		boolean[] colores = new boolean [g.getOrden()];
+		int[] colores = new int [g.getOrden()];
 		int color;
 		elementos[0][3]=1;
 		for(int i = 0; i<g.getOrden(); i++){
 			color =1;
 			for(int j = 0; j<g.getOrden(); i++)
-				if(g.getAdyacencia(i, elementos[j][0]) && elementos[j][3]==color)
+				if(g.getAdyacencia(i, elementos[j][0]) && elementos[j][3]==color){
 					color++;
-			
+					sumarColor(color, colores);
+				}
 			elementos[i][3]=color;
 		}
 		
 		return contarColores(colores);
 	}
 	
-	private static int contarColores(boolean [] colores){
+	private static void sumarColor(int  color, int [] colores){
+		int i=0;
+		while(i<colores.length && colores[i]!=0)
+			i++;		
+		if(i<colores.length)
+			colores[i]=i;
+	}
+	private static int contarColores(int [] colores){
 		int cont=0;
 		for(int i=0; i<colores.length; i++){
-			if(colores[i])
+			if(colores[i]!=0)
 				cont++;
 		}
 		return cont;		

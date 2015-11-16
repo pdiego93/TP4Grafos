@@ -50,7 +50,4 @@ public class GrafoNDNP extends MatrizSimetrica{
 	public void setGradoMin(int gradoMin) {
 		this.gradoMin = gradoMin;
 	}
-	
-	
-
 }

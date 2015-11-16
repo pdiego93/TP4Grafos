@@ -6,12 +6,13 @@ import grafo.GrafoNDNP;
 
 public class Generador {
 	
-	public static void aleatorioPorcAdy(GrafoNDNP g, int cantNodos, double porcAdy){
+	public static GrafoNDNP aleatorioPorcAdy(int cantNodos, double porcAdy){
 		
+		
+		Random r = new Random();
+		GrafoNDNP g = new GrafoNDNP(cantNodos);
 		int cantAdy = (int) (g.getMaxAristas()*porcAdy/100),
 				maxAristas;
-		Random r = new Random();
-		System.out.println(cantAdy);
 		maxAristas = g.getMaxAristas();
 		int arista= r.nextInt(maxAristas);
 		while(cantAdy>0){
@@ -22,11 +23,13 @@ public class Generador {
 			}
 			arista = r.nextInt(maxAristas);
 		}
+		return g;
 	}
 
-	public static void aleatorioProbAristas( GrafoNDNP g, int nodos, double prob) {
+	public static GrafoNDNP aleatorioProbAristas(int nodos, double prob) {
 		Random r = new Random();
 		double p;
+		GrafoNDNP g = new GrafoNDNP(nodos);
 		
 		for(int i = 0; i < nodos; i++) {
 			for(int j = i + 1; j < nodos; j++){
@@ -35,6 +38,8 @@ public class Generador {
 					g.setAdyacencia(i, j);
 			}
 		}
+		
+		return g;
 	}
 	
 	public static GrafoNDNP regularPorcAdy(int nodos, double porc){
