@@ -1,7 +1,5 @@
 package grafo;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 
 public class Coloreo {
@@ -70,9 +68,9 @@ public class Coloreo {
 			if(colores[i])
 				cont++;
 		}
-		return cont;
-		
+		return cont;		
 	}
+	
 	private static void mezclar(int [][] v){
 		Random rnd = new Random();
 		int aux;

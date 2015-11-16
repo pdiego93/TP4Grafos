@@ -1,8 +1,9 @@
 package probador;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
-public class App {
+public class MainProbador {
 
 	public static void main(String[] args) {
 		ProbadorGrafos p = new ProbadorGrafos("grafo.in", "coloreado.out");

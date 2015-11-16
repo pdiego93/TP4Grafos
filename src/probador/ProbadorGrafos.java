@@ -8,7 +8,6 @@ public class ProbadorGrafos {
 	private int cA, nodos;
 	
 	public ProbadorGrafos(String in, String out) {
-		
 		FileReader archEnt = null, archSal = null;
 		BufferedReader lectorEnt = null, lectorSal;
 		try {
