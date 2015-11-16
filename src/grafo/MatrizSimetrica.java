@@ -27,20 +27,15 @@ public class MatrizSimetrica {
 	}
 
 	public void setAdyacencia(int i, int j) {
-		System.out.println(i + " " + j);
 		vector[this.getPos(i, j)] = true;
 	}
 
-	public int getOrden() {
+	public int getCantNodos() {
 		return tam;
 	}
 
 	public int getMaxAristas() {
 		return tam * (tam - 1) / 2;
-	}
-	
-	public int getCantNodos(){
-		return tam;
 	}
 
 	public int cantidadAristas() {
@@ -56,9 +51,9 @@ public class MatrizSimetrica {
 		int grado = 0;
 		for (int i = 0; i < tam; i++)
 			if (i != nodo)
-				if (vector[this.getPos(i, nodo)]) {
+				if (vector[this.getPos(i, nodo)]) 
 					grado++;
-				}
+				
 		return grado;
 	}
 
@@ -81,7 +76,7 @@ public class MatrizSimetrica {
 
 	public boolean todosMismoGrado(int grado) {
 		int i;
-		for (i = 0; i < vector.length; i++)
+		for (i = 0; i < getCantNodos(); i++)
 			if (this.getGrado(i) != grado)
 				return false;
 

@@ -13,5 +13,6 @@ public class Main {
 		GrafoNDNP g4 = Generador.regularPorcAdy(1000, 50);
 		GrafoNDNP g5 = Generador.regularPorcAdy(1000, 75);
 		
-	}
+		
+			}
 }

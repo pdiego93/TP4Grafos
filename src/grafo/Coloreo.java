@@ -5,41 +5,17 @@ import java.util.Random;
 public class Coloreo {
 	private int [][] elementos;
 	private int [][] mat;
-	
+	private int [] colores;
 	public Coloreo(GrafoNDNP g){
-		elementos = new int [g.getOrden()][3];
+		elementos = new int [g.getCantNodos()][3];
 		for(int i = 0; i<elementos.length;i++){
 			elementos[i][0]=i;
 			elementos[i][1]=g.getGrado(i);
 		}
+		colores = new int [g.getCantNodos()];
+		mat = getMatrizCopia(elementos);
+	}
 		
-		mat = getMatrizCopia(elementos);
-	}
-	
-	public int [][] getMatriz(){
-		return mat;
-	}
-	
-	public int secuencial(GrafoNDNP g){
-		mat = getMatrizCopia(elementos);
-		mezclar(mat);
-		return colorear(mat, g);
-	}
-	
-	public int welshPowell(GrafoNDNP g){
-		mat = getMatrizCopia(elementos);
-		mezclar(mat);
-		ordenMenorAMayor(mat);
-		return colorear(mat, g);
-	}
-	
-	public int matula(GrafoNDNP g){
-		mat = getMatrizCopia(elementos);
-		mezclar(mat);
-		ordenMayorAMenor(mat);
-		return colorear(mat, g);
-	}
-	
 	public int [][] getMatrizCopia(int [][] m){
 		mat = new int [m.length][m[0].length];
 		for(int i=0; i<m.length; i++)
@@ -49,31 +25,34 @@ public class Coloreo {
 		return mat;
 	}
 	
+
 	public int colorear(GrafoNDNP g){
-		int[] colores = new int [g.getOrden()];
+		
 		int color;
-		elementos[0][3]=1;
-		for(int i = 0; i<g.getOrden(); i++){
+		mat[0][2]=1;
+		for(int i = 1; i<g.getCantNodos(); i++){
 			color =1;
-			for(int j = 0; j<g.getOrden(); i++)
-				if(g.getAdyacencia(i, elementos[j][0]) && elementos[j][3]==color){
+			for(int j = 0; j<g.getCantNodos(); j++)
+				if(j != mat[i][0]){
+					if(g.getAdyacencia(j, mat[i][0]) && mat[j][2]==color){
 					color++;
-					sumarColor(color, colores);
+					}
 				}
-			elementos[i][3]=color;
+			mat[i][2]=color;
+			sumarColor(color);
 		}
 		
-		return contarColores(colores);
+		return contarColores();
 	}
 	
-	private static void sumarColor(int  color, int [] colores){
+	private void sumarColor(int  color){
 		int i=0;
-		while(i<colores.length && colores[i]!=0)
+		while(i<colores.length && colores[i]!=0 && colores[i] < color)
 			i++;		
 		if(i<colores.length)
-			colores[i]=i;
+			colores[i]=color;
 	}
-	private static int contarColores(int [] colores){
+	private int contarColores(){
 		int cont=0;
 		for(int i=0; i<colores.length; i++){
 			if(colores[i]!=0)
@@ -134,6 +113,15 @@ public class Coloreo {
 			}
 			i++;
 		}
+	}
+	
+	public int [] getColores(){
+		int [] nodosColor = new int [mat.length];
+		for(int i=0; i<mat.length; i++){
+			nodosColor[i]=mat[i][2];
+			System.out.println("col " + mat[i][0] + " " + mat[i][1] +" "+ mat[i][2]);
+		}
+		return nodosColor;
 	}
 
 }

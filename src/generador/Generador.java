@@ -52,7 +52,7 @@ public class Generador {
 		
 		GrafoNDNP g = new GrafoNDNP(nodos);
 		
-		if (grado >= nodos || (nodos%2==1 && grado%2==1) || grado<1){
+		if (grado >= nodos || (nodos%2==1 && grado%2==1) || grado<0){
 			System.out.println("No se puede realizar el grafo con grado: " + grado);
 			return g;
 		}
@@ -60,18 +60,23 @@ public class Generador {
 			genGrado1(g, nodos);
 		
 		if(grado>=2){
-			genGrado2(g, nodos);
 			
-			if(grado>2)
-				if(nodos%grado == 0)
+			if(grado>2){
+				
+				if(nodos%grado == 0 && grado >3)
 					genGradoMultiplo(g, nodos, grado);
 				else
 					genGradoMayor2(g, nodos, grado);
+			}
+			else
+				genGrado2(g, nodos);
 		}
-		
-		if(!g.todosMismoGrado(grado))
+
+
+		if(!g.todosMismoGrado(grado)){
 			System.out.println("No se puede generar un grafo regular");
-		g = new GrafoNDNP(nodos);
+			g = new GrafoNDNP(nodos);
+		}
 		return g;
 	}
 	
@@ -94,6 +99,7 @@ public class Generador {
 	
 	private static void genGradoMayor2(GrafoNDNP g, int nodos, int grado){
 		int i=0, j, vueltas;
+		genGrado2(g, nodos);
 		while(i<nodos){
 			j=i+grado;
 			vueltas =0;
@@ -102,17 +108,16 @@ public class Generador {
 					j-=nodos;
 				if(g.getGrado(j)<grado && i != j && !g.getAdyacencia(i, j))
 					g.setAdyacencia(i, j);
-				System.out.println("g: "+grado);
 				j+=grado;
 				vueltas++;
+				
 			}
-		i++;
+			i++;
 		}
 		
 	}
 	
 	private static void genGradoMultiplo(GrafoNDNP g, int nodos, int grado){
-		int i=0, j, salto = nodos/grado;
 		genGrado1(g, nodos);
 		genGradoMayor2(g, nodos, grado-1);
 	}

@@ -3,12 +3,14 @@ package grafo;
 public class GrafoNDNP extends MatrizSimetrica{
 	protected int[] colores;
 	protected int cantColores;
+	protected int cantAristas;
 	protected int porcAdy;
 	protected int gradoMax;
 	protected int gradoMin;
 
 	public GrafoNDNP(int nodos) {
 		super(nodos);
+		this.colores = new int[nodos];
 	}
 	
 	public int getCantColores() {
@@ -24,7 +26,7 @@ public class GrafoNDNP extends MatrizSimetrica{
 	}
 	
 	public int getColor(int nodo){
-		return this.colores[nodo-1];
+		return this.colores[nodo];
 	}
 
 	public int getPorcAdy() {
@@ -51,24 +53,35 @@ public class GrafoNDNP extends MatrizSimetrica{
 		this.gradoMin = gradoMin;
 	}
 	
-
-	public int secuencial(GrafoNDNP g){
-		Coloreo col = new Coloreo(g);
+	public void secuencial(){
+		Coloreo col = new Coloreo(this);
 		col.mezclar();
-		return col.colorear(g);
+		cantColores = col.colorear(this);
+		colores = col.getColores();
 	}
 	
-	public int welshPowell(GrafoNDNP g){
-		Coloreo col = new Coloreo(g);
+	public void welshPowell(){
+		Coloreo col = new Coloreo(this);
 		col.mezclar();
 		col.ordenMayorAMenor();
-		return col.colorear(g);
+		cantColores =  col.colorear(this);
+		colores = col.getColores();
 	}
 	
-	public int matula(GrafoNDNP g){
-		Coloreo col = new Coloreo(g);
+	public void matula(){
+		Coloreo col = new Coloreo(this);
 		col.mezclar();
 		col.ordenMenorAMayor();
-		return col.colorear(g);
+		cantColores = col.colorear(this);
+		colores = col.getColores();
+	}
+
+
+	public int getCantAristas() {
+		return cantAristas;
+	}
+
+	public void setCantAristas(int cantAristas) {
+		this.cantAristas = cantAristas;
 	}
 }

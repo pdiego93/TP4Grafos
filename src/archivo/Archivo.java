@@ -15,19 +15,25 @@ public class Archivo {
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
-		String data;
-		int orden, cantAristas, porcAdy, gMax, gMin;
+		int cantNodos, cantAristas, porcAdy, gradoMax, gradoMin;
 		try {
 			archivo = new File(ruta);
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
 			String[] linea = br.readLine().split(" ");
-			orden = Integer.parseInt(linea[0]);
+			cantNodos = Integer.parseInt(linea[0]);
 			cantAristas = Integer.parseInt(linea[1]);
 			porcAdy = Integer.parseInt(linea[2]);
-			gMax = Integer.parseInt(linea[3]);
-			gMin = Integer.parseInt(linea[4]);
-			for (int i = 0; i < orden; i++) {
+			gradoMax = Integer.parseInt(linea[3]);
+			gradoMin = Integer.parseInt(linea[4]);
+			
+			g = new GrafoNDNP(cantNodos);
+			g.setCantAristas(cantAristas);
+			g.setPorcAdy(porcAdy);
+			g.setGradoMax(gradoMax);
+			g.setGradoMin(gradoMin);
+			
+			for (int i = 0; i < cantNodos; i++) {
 				linea = br.readLine().split(" ");
 				g.setAdyacencia(Integer.parseInt(linea[0]),
 						Integer.parseInt(linea[1]));
@@ -45,16 +51,48 @@ public class Archivo {
 		}
 	}
 
-	public static void escribirGrafoColoreado(GrafoNDNP g, String ruta,
-			int[] colores) {
+//	public static void escribirGrafoColoreado(GrafoNDNP g, String ruta,
+//			int[] colores) {
+//		FileWriter fw;
+//		PrintWriter pw = null;
+//		int orden = g.getCantNodos(), cantAristas = g.cantidadAristas(), gradoMin = g
+//				.getGrado(0), gradoMax = g.getGrado(0), aux, cantCol = colores.length;
+//
+//		double porc = (g.cantidadAristas() / g.getMaxAristas()) * 100;
+//
+//		for (int i = 1; i < orden; i++) {
+//			aux = g.getGrado(i);
+//			if (aux < gradoMin)
+//				gradoMin = aux;
+//			if (aux > gradoMax)
+//				gradoMax = aux;
+//		}
+//		try {
+//			fw = new FileWriter(ruta);
+//			pw = new PrintWriter(fw);
+//			pw.println(orden + " " + cantCol + " " + cantAristas + " " + porc
+//					+ " " + gradoMax + " " + gradoMin);
+//			for (int i = 0; i < orden; i++)
+//				for (int j = i + 1; j < orden; j++)
+//					if (g.getAdyacencia(i, j))
+//						pw.println(i + " " + j);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			pw.close();
+//		}
+//	}
+
+	public static void escribirGrafoColoreado(GrafoNDNP g, String ruta) {
 		FileWriter fw;
 		PrintWriter pw = null;
-		int orden = g.getOrden(), cantAristas = g.cantidadAristas(), gradoMin = g
-				.getGrado(0), gradoMax = g.getGrado(0), aux, cantCol = colores.length;
+		int cantNodos = g.getCantNodos(), 
+				gradoMin = g.getGrado(0),
+				gradoMax = g.getGrado(0),
+				aux;
+		
 
-		double porc = (g.cantidadAristas() / g.getMaxAristas()) * 100;
-
-		for (int i = 1; i < orden; i++) {
+		for (int i = 1; i < cantNodos; i++) {
 			aux = g.getGrado(i);
 			if (aux < gradoMin)
 				gradoMin = aux;
@@ -64,25 +102,24 @@ public class Archivo {
 		try {
 			fw = new FileWriter(ruta);
 			pw = new PrintWriter(fw);
-			pw.println(orden + " " + cantCol + " " + cantAristas + " " + porc
+			pw.println(cantNodos + " " + g.getCantColores() + " " + g.getCantAristas() + " " + g.getPorcAdy()
 					+ " " + gradoMax + " " + gradoMin);
-			for (int i = 0; i < orden; i++)
-				for (int j = i + 1; j < orden; j++)
-					if (g.getAdyacencia(i, j))
-						pw.println(i + " " + j);
+			for (int i = 0; i < cantNodos; i++)
+				pw.println(i + " " + g.getColor(i));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			pw.close();
 		}
 	}
-
+	
+	
+	
 	public static void leerGrafoColoreado(GrafoNDNP g, String ruta) {
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
-		String data;
-		int cantNodos, cantColores, cantAristas, porcAdy, gMax, gMin;
+		int cantNodos, cantColores, cantAristas, porcAdy, gradoMax, gradoMin;
 		
 		//N CCol  CA %Ady GrMax GrMin
 		//Nodo Color
@@ -95,8 +132,16 @@ public class Archivo {
 			cantColores = Integer.parseInt(linea[1]);
 			cantAristas = Integer.parseInt(linea[2]);
 			porcAdy = Integer.parseInt(linea[3]);
-			gMax = Integer.parseInt(linea[4]);
-			gMin = Integer.parseInt(linea[5]);
+			gradoMax = Integer.parseInt(linea[4]);
+			gradoMin = Integer.parseInt(linea[5]);
+			
+			g = new GrafoNDNP(cantNodos);
+			g.setCantColores(cantColores);
+			g.setCantAristas(cantAristas);
+			g.setPorcAdy(porcAdy);
+			g.setGradoMax(gradoMax);
+			g.setGradoMin(gradoMin);
+			
 			for (int i = 0; i < cantNodos; i++) {
 				linea = br.readLine().split(" ");
 				g.setColor(Integer.parseInt(linea[0]),
