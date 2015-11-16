@@ -1,8 +1,12 @@
 package grafo;
 
 public class MatrizSimetrica {
-	private boolean[] vector = null;
-	private int tam;
+	protected boolean[] vector = null;
+	protected int tam;
+	
+	public MatrizSimetrica() {
+		tam = 0;
+	}
 
 	public MatrizSimetrica(int n) {
 		tam = n;
@@ -34,7 +38,7 @@ public class MatrizSimetrica {
 	public int getCantNodos() {
 		return tam;
 	}
-
+	
 	public int getMaxAristas() {
 		return tam * (tam - 1) / 2;
 	}

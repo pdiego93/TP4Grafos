@@ -13,6 +13,15 @@ public class GrafoNDNP extends MatrizSimetrica{
 		this.colores = new int[nodos];
 	}
 	
+	public GrafoNDNP() {
+		super();
+	}	
+
+	public void setCantNodos(int nodos) {
+		this.tam = nodos;
+		this.colores = new int[nodos];
+	}
+	
 	public int getCantColores() {
 		return cantColores;
 	}
@@ -22,11 +31,11 @@ public class GrafoNDNP extends MatrizSimetrica{
 	}
 
 	public void setColor(int nodo, int color){
-		this.colores[nodo-1] = color;
+		this.colores[nodo] = color;
 	}
 	
 	public int getColor(int nodo){
-		return this.colores[nodo-1];
+		return this.colores[nodo];
 	}
 
 	public int getPorcAdy() {

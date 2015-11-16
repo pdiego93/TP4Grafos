@@ -11,15 +11,18 @@ import grafo.GrafoNDNP;
 
 public class Archivo {
 
-	public static void leerGrafo(GrafoNDNP g, String ruta) {
+	public static GrafoNDNP leerGrafo(String ruta) {
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
 		int cantNodos, cantAristas, porcAdy, gradoMax, gradoMin;
+		GrafoNDNP g = null; 
+		
 		try {
 			archivo = new File(ruta);
 			fr = new FileReader(archivo);
 			br = new BufferedReader(fr);
+			
 			String[] linea = br.readLine().split(" ");
 			cantNodos = Integer.parseInt(linea[0]);
 			cantAristas = Integer.parseInt(linea[1]);
@@ -49,6 +52,8 @@ public class Archivo {
 				e.printStackTrace();
 			}
 		}
+		
+		return g;
 	}
 
 //	public static void escribirGrafoColoreado(GrafoNDNP g, String ruta,
@@ -105,7 +110,7 @@ public class Archivo {
 			pw.println(cantNodos + " " + g.getCantColores() + " " + g.getCantAristas() + " " + g.getPorcAdy()
 					+ " " + gradoMax + " " + gradoMin);
 			for (int i = 0; i < cantNodos; i++)
-				pw.println(i + " " + g.getColor(i));
+				pw.println((i+1) + " " + g.getColor(i));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -115,11 +120,12 @@ public class Archivo {
 	
 	
 	
-	public static void leerGrafoColoreado(GrafoNDNP g, String ruta) {
+	public static GrafoNDNP leerGrafoColoreado(String ruta) {
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
 		int cantNodos, cantColores, cantAristas, porcAdy, gradoMax, gradoMin;
+		GrafoNDNP g = null; 
 		
 		//N CCol  CA %Ady GrMax GrMin
 		//Nodo Color
@@ -135,7 +141,8 @@ public class Archivo {
 			gradoMax = Integer.parseInt(linea[4]);
 			gradoMin = Integer.parseInt(linea[5]);
 			
-			g = new GrafoNDNP(cantNodos);
+			g = new GrafoNDNP();
+			g.setCantNodos(cantNodos);
 			g.setCantColores(cantColores);
 			g.setCantAristas(cantAristas);
 			g.setPorcAdy(porcAdy);
@@ -144,7 +151,7 @@ public class Archivo {
 			
 			for (int i = 0; i < cantNodos; i++) {
 				linea = br.readLine().split(" ");
-				g.setColor(Integer.parseInt(linea[0]),
+				g.setColor(Integer.parseInt(linea[0])-1,
 						Integer.parseInt(linea[1]));
 			}
 		} catch (Exception e) {
@@ -157,5 +164,7 @@ public class Archivo {
 				e.printStackTrace();
 			}
 		}
+		
+		return g;
 	}
 }
