@@ -3,12 +3,15 @@ package grafo;
 public class GrafoNDNP extends MatrizSimetrica{
 	protected int[] colores;
 	protected int cantColores;
+	protected int cantNodos;
+	protected int cantAristas;
 	protected int porcAdy;
 	protected int gradoMax;
 	protected int gradoMin;
 
 	public GrafoNDNP(int nodos) {
 		super(nodos);
+		this.cantNodos = nodos;
 	}
 	
 	public int getCantColores() {
@@ -50,4 +53,22 @@ public class GrafoNDNP extends MatrizSimetrica{
 	public void setGradoMin(int gradoMin) {
 		this.gradoMin = gradoMin;
 	}
+
+	public int getCantNodos() {
+		return cantNodos;
+	}
+
+	public void setCantNodos(int cantNodos) {
+		this.cantNodos = cantNodos;
+	}
+
+	public int getCantAristas() {
+		return cantAristas;
+	}
+
+	public void setCantAristas(int cantAristas) {
+		this.cantAristas = cantAristas;
+	}
+	
+	
 }

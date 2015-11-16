@@ -82,7 +82,7 @@ public class Archivo {
 		FileReader fr = null;
 		BufferedReader br = null;
 		String data;
-		int cantNodos, cantColores, cantAristas, porcAdy, gMax, gMin;
+		int cantNodos, cantColores, cantAristas, porcAdy, gradoMax, gradoMin;
 		
 		//N CCol  CA %Ady GrMax GrMin
 		//Nodo Color
@@ -95,8 +95,16 @@ public class Archivo {
 			cantColores = Integer.parseInt(linea[1]);
 			cantAristas = Integer.parseInt(linea[2]);
 			porcAdy = Integer.parseInt(linea[3]);
-			gMax = Integer.parseInt(linea[4]);
-			gMin = Integer.parseInt(linea[5]);
+			gradoMax = Integer.parseInt(linea[4]);
+			gradoMin = Integer.parseInt(linea[5]);
+			
+			g = new GrafoNDNP(cantNodos);
+			g.setCantColores(cantColores);
+			g.setCantAristas(cantAristas);
+			g.setPorcAdy(porcAdy);
+			g.setGradoMax(gradoMax);
+			g.setGradoMin(gradoMin);
+			
 			for (int i = 0; i < cantNodos; i++) {
 				linea = br.readLine().split(" ");
 				g.setColor(Integer.parseInt(linea[0]),
