@@ -7,7 +7,7 @@ public class Coloreo {
 	private int [][] mat;
 	
 	public Coloreo(GrafoNDNP g){
-		elementos = new int [g.getOrden()][3];
+		elementos = new int [g.getCantNodos()][3];
 		for(int i = 0; i<elementos.length;i++){
 			elementos[i][0]=i;
 			elementos[i][1]=g.getGrado(i);
@@ -48,12 +48,12 @@ public class Coloreo {
 	}
 	
 	private static int colorear(int [][] elementos, GrafoNDNP g){
-		int[] colores = new int [g.getOrden()];
+		int[] colores = new int [g.getCantNodos()];
 		int color;
 		elementos[0][3]=1;
-		for(int i = 0; i<g.getOrden(); i++){
+		for(int i = 0; i<g.getCantNodos(); i++){
 			color =1;
-			for(int j = 0; j<g.getOrden(); i++)
+			for(int j = 0; j<g.getCantNodos(); i++)
 				if(g.getAdyacencia(i, elementos[j][0]) && elementos[j][3]==color){
 					color++;
 					sumarColor(color, colores);

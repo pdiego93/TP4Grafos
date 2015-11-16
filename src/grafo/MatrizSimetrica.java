@@ -31,16 +31,12 @@ public class MatrizSimetrica {
 		vector[this.getPos(i, j)] = true;
 	}
 
-	public int getOrden() {
+	public int getCantNodos() {
 		return tam;
 	}
 
 	public int getMaxAristas() {
 		return tam * (tam - 1) / 2;
-	}
-	
-	public int getCantNodos(){
-		return tam;
 	}
 
 	public int cantidadAristas() {
