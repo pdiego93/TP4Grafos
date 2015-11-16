@@ -6,5 +6,4 @@ public class GrafoNDNP extends MatrizSimetrica{
 		super(nodos);
 	}
 
-
 }
