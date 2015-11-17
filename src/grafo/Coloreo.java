@@ -34,7 +34,7 @@ public class Coloreo {
 			color =1;
 			for(int j = 0; j<g.getCantNodos(); j++)
 				if(j != mat[i][0])
-					if(g.getAdyacencia(j, mat[i][0]) && mat[j][2]==color)
+					if(g.getAdyacencia(mat[i][0], j) && mat[j][2]!=0)
 						color++;
 
 			mat[i][2]=color;

@@ -151,20 +151,24 @@ public class Generador {
                 }
             }
         } else {
-            for (int i = 0; i < nodos; i=i+2) {
+            for (int i = 0; i < nodos; i++) {
                 for (int j = i + 1; j < i + ((grado - 1) / 2) + 1; j++) {
                     int[] e = new int[]{v[i], v[j % nodos]};
+                    System.out.println("f1: " + i + " " + (j % nodos));
+                    System.out.println(t);
                     aristas[t++] = e;
                 }
 
-                for (int j = i - 1; j > i - ((grado - 1) / 2) - 1; j--) {
+               /* for (int j = i - 1; j > i - ((grado - 1) / 2) - 1; j--) {
                     int[] e = new int[]{v[i], v[(j + nodos) % nodos]};
+                    System.out.println("f2: " + i + " " + ((j % nodos)%nodos));
                     aristas[t++] = e;
-                }
+                }*/
             }
 
             for (int i = 0; i < nodos/2; i++) {
                 aristas[t++] = new int[]{v[i], v[(i+(nodos/2))%nodos]};
+                System.out.println("f: " + i + " " + ((i+(nodos/2))%nodos));
             }
         }
         GrafoNDNP g = new GrafoNDNP(nodos);
@@ -174,9 +178,12 @@ public class Generador {
         }
         if(!g.todosMismoGrado(grado)){
 			System.out.println("No se puede generar un grafo regular");
-			System.out.println("2");
 			g = null;
-		}
+        }
+			else
+				System.out.println("Grafo generado correctamente");
+			
+		
         return g;
 	}
 	

@@ -10,7 +10,12 @@ public class MainGenerador {
 		// Archivo.escribirGrafo(g, "Entradas//grafo.in");
 
 //		g = Generador.regularPorcAdy(1000, 80);
-		g = Generador.regularGrado(12, 5);
+		g = Generador.regularPorcAdy(1000, 75);
+		/*for(int i=0;i<g.getCantNodos();i++)
+			for(int j=0; j<g.getCantNodos();j++)
+				if(i!=j)
+					System.out.println(i + " " + j + " " + g.getAdyacencia(i, j));
+		*/
 		if(g==null)
 			return;
 //		int f = 0;
