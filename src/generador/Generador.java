@@ -132,7 +132,7 @@ public class Generador {
 	public static GrafoNDNP regularGrado(int nodos, int grado){
 		if (grado >= nodos || (nodos%2==1 && grado%2==1) || grado<0){
 			System.out.println("No se puede realizar el grafo con grado: " + grado);
-			System.out.println("1");
+			//System.out.println("1");
 			return null;
 		}		
 		
