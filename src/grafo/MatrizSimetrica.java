@@ -1,8 +1,12 @@
 package grafo;
 
 public class MatrizSimetrica {
-	private boolean[] vector = null;
-	private int tam;
+	protected boolean[] vector = null;
+	protected int tam;
+	
+	public MatrizSimetrica() {
+		tam = 0;
+	}
 
 	public MatrizSimetrica(int n) {
 		tam = n;
@@ -33,18 +37,9 @@ public class MatrizSimetrica {
 	public int getCantNodos() {
 		return tam;
 	}
-
+	
 	public int getMaxAristas() {
 		return tam * (tam - 1) / 2;
-	}
-
-	public int cantidadAristas() {
-		int aristas = 0;
-		int maxAristas = tam * (tam - 1) / 2;
-		for (int i = 0; i < maxAristas; i++)
-			if (vector[i])
-				aristas++;
-		return aristas;
 	}
 
 	public int getGrado(int nodo) {

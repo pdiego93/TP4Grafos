@@ -26,18 +26,17 @@ public class Coloreo {
 	}
 	
 
+
 	public int colorear(GrafoNDNP g){
-		
 		int color;
 		mat[0][2]=1;
 		for(int i = 1; i<g.getCantNodos(); i++){
 			color =1;
 			for(int j = 0; j<g.getCantNodos(); j++)
-				if(j != mat[i][0]){
-					if(g.getAdyacencia(j, mat[i][0]) && mat[j][2]==color){
-					color++;
-					}
-				}
+				if(j != mat[i][0])
+					if(g.getAdyacencia(j, mat[i][0]) && mat[j][2]==color)
+						color++;
+
 			mat[i][2]=color;
 			sumarColor(color);
 		}
@@ -51,6 +50,8 @@ public class Coloreo {
 			i++;		
 		if(i<colores.length)
 			colores[i]=color;
+		
+		
 	}
 	private int contarColores(){
 		int cont=0;
@@ -119,7 +120,6 @@ public class Coloreo {
 		int [] nodosColor = new int [mat.length];
 		for(int i=0; i<mat.length; i++){
 			nodosColor[i]=mat[i][2];
-			System.out.println("col " + mat[i][0] + " " + mat[i][1] +" "+ mat[i][2]);
 		}
 		return nodosColor;
 	}
