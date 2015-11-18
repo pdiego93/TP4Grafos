@@ -190,11 +190,17 @@ public class Archivo {
 				else
 					pw.println("Color: " + g.getColorTot(i,1) + "\t Rep:" + g.getCantRepColorTot(i,1));
 			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			pw.close();
 		}
+		if(tipo==0)
+			nombre = "Rnd-";
+		else
+			nombre = "Reg-";
 		
 		try{
 			File folder = new File("Informes");
@@ -213,6 +219,11 @@ public class Archivo {
 		} finally {
 			pw.close();
 		}
+		
+		if(tipo==0)
+			nombre = "Rnd-";
+		else
+			nombre = "Reg-";
 		
 		try{
 			File folder = new File("Informes");

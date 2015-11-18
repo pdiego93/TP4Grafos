@@ -66,6 +66,8 @@ public class MatrizSimetrica {
 	}
 
 	public boolean getAdyacencia(int pos) {
+		if(pos==-1)
+			return false;
 		return vector[pos];
 	}
 

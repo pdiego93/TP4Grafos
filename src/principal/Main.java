@@ -1,9 +1,5 @@
 package principal;
 
-
-
-import java.awt.geom.RectangularShape;
-
 import archivo.Archivo;
 import generador.Generador;
 import grafo.GrafoNDNP;
@@ -24,14 +20,17 @@ public class Main {
 			g.secuencial();
 			cantColSec[cont]=g.getCantColores();
 			g.welshPowell();
-			cantColSec[cont]=g.getCantColores();
+			cantColWP[cont]=g.getCantColores();
 			g.matula();
 			cantColMat[cont]=g.getCantColores();
+			
+			if(cont%500==0)
+				System.out.println(cont);
 			cont++;
 		}
-		System.out.println("Coloreo secuencial. Aleatorio. Porc. Ady: 40. Primer mejor corrida nro: " + getMenor(cantColSec) + " colores: " + cantColSec[getMenor(cantColSec)]);
-		System.out.println("Welsh-Powell. Aleatorio. Porc. Ady: 40.  Primer mejor corrida nro: "+ getMenor(cantColWP) + " colores: " + cantColWP[getMenor(cantColWP)]);
-		System.out.println("Coloreo Matula. Aleatorio. Porc. Ady: 40. Primer mejor corrida nro: " + getMenor(cantColMat) + " colores: " + cantColMat[getMenor(cantColMat)]);
+		System.out.println("Coloreo secuencial. Aleatorio. Porc. Ady: 40. Primer mejor corrida nro: " + (getMenor(cantColSec)+1) + " colores: " + cantColSec[getMenor(cantColSec)]);
+		System.out.println("Welsh-Powell. Aleatorio. Porc. Ady: 40.  Primer mejor corrida nro: "+ (getMenor(cantColWP)+1) + " colores: " + cantColWP[getMenor(cantColWP)]);
+		System.out.println("Coloreo Matula. Aleatorio. Porc. Ady: 40. Primer mejor corrida nro: " + (getMenor(cantColMat)+1) + " colores: " + cantColMat[getMenor(cantColMat)]);
 		Archivo.escribirInformeDeColores(g, 40, cant, 0); 
 		
 		g.reiniciarColoresTot();
@@ -45,9 +44,11 @@ public class Main {
 			g.secuencial();
 			cantColSec[cont]=g.getCantColores();
 			g.welshPowell();
-			cantColSec[cont]=g.getCantColores();
+			cantColWP[cont]=g.getCantColores();
 			g.matula();
 			cantColMat[cont]=g.getCantColores();
+			if(cont%500==0)
+				System.out.println(cont);
 			cont++;
 		}
 		System.out.println("Coloreo secuencial. Aleatorio. Porc. Ady: 60. Primer mejor corrida nro: " + getMenor(cantColSec) + " colores: " + cantColSec[getMenor(cantColSec)]);
@@ -66,9 +67,11 @@ public class Main {
 			g.secuencial();
 			cantColSec[cont]=g.getCantColores();
 			g.welshPowell();
-			cantColSec[cont]=g.getCantColores();
+			cantColWP[cont]=g.getCantColores();
 			g.matula();
 			cantColMat[cont]=g.getCantColores();
+			if(cont%500==0)
+				System.out.println(cont);
 			cont++;
 		}
 		System.out.println("Coloreo secuencial. Aleatorio. Porc. Ady: 90. Primer mejor corrida nro: " + getMenor(cantColSec) + " colores: " + cantColSec[getMenor(cantColSec)]);
@@ -88,9 +91,11 @@ public class Main {
 			g.secuencial();
 			cantColSec[cont]=g.getCantColores();
 			g.welshPowell();
-			cantColSec[cont]=g.getCantColores();
+			cantColWP[cont]=g.getCantColores();
 			g.matula();
 			cantColMat[cont]=g.getCantColores();
+			if(cont%500==0)
+				System.out.println(cont);
 			cont++;
 		}
 		System.out.println("Coloreo secuencial. Regular. Porc. Ady: 50. Primer mejor corrida nro: " + getMenor(cantColSec) + " colores: " + cantColSec[getMenor(cantColSec)]);
@@ -109,9 +114,11 @@ public class Main {
 			g.secuencial();
 			cantColSec[cont]=g.getCantColores();
 			g.welshPowell();
-			cantColSec[cont]=g.getCantColores();
+			cantColWP[cont]=g.getCantColores();
 			g.matula();
 			cantColMat[cont]=g.getCantColores();
+			if(cont%500==0)
+				System.out.println(cont);
 			cont++;
 		}
 		System.out.println("Coloreo secuencial. Regular. Porc. Ady: 75. Primer mejor corrida nro: " + getMenor(cantColSec) + " colores: " + cantColSec[getMenor(cantColSec)]);
