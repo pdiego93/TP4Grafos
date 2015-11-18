@@ -164,4 +164,74 @@ public class Archivo {
 		
 		return g;
 	}
+	
+	public static void escribirInformeDeColores(GrafoNDNP g, int porc, int cant, int tipo){
+		//tipo: 0 para aleatorio, 1 para regular
+		FileWriter fw;
+		PrintWriter pw = null;
+		String nombre;
+		
+			if(tipo==0)
+				nombre = "Rnd-";
+			else
+				nombre = "Reg-";
+			
+			
+		try {
+			File folder = new File("Informes");
+			folder.mkdir();
+			
+			nombre = nombre + "Sec-"+porc+"-"+cant+".ae";
+			fw = new FileWriter("Informes//"+nombre);
+			pw = new PrintWriter(fw);
+			for(int i=0; i<g.getCantNodos();i++)
+				if(g.getColorTot(i,1)==0)
+					break;
+				else
+					pw.println("Color: " + g.getColorTot(i,1) + "\t Rep:" + g.getCantRepColorTot(i,1));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pw.close();
+		}
+		
+		try{
+			File folder = new File("Informes");
+			folder.mkdir();
+			nombre = nombre + "WP-"+porc+"-"+cant+".ae";
+			fw = new FileWriter("Informes//"+nombre);
+			pw = new PrintWriter(fw);
+			for(int i=0; i<g.getCantNodos();i++)
+				if(g.getColorTot(i,2)==0)
+					break;
+				else
+					pw.println("Color: " + g.getColorTot(i,2) + "\t Rep:" + g.getCantRepColorTot(i,2));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pw.close();
+		}
+		
+		try{
+			File folder = new File("Informes");
+			folder.mkdir();
+			nombre = nombre + "Mat-"+porc+"-"+cant+".ae";
+			fw = new FileWriter("Informes//"+nombre);
+			pw = new PrintWriter(fw);
+			for(int i=0; i<g.getCantNodos();i++)
+				if(g.getColorTot(i,3)==0)
+					break;
+				else
+					pw.println("Color: " + g.getColorTot(i,3) + "\t Rep:" + g.getCantRepColorTot(i,3));
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pw.close();
+		}
+		
+	}
+	
 }
