@@ -74,6 +74,11 @@ public class Coloreo {
 		}
 		
 	}
+	
+	public void limpiarColores(){
+		for(int i=0; i<mat.length;i++)
+			mat[i][2]=0;
+	}
 	private int contarColores(){
 		int cont=0;
 		for(int i=0; i<colores.length; i++){

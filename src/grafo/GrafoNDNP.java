@@ -100,6 +100,7 @@ public class GrafoNDNP extends MatrizSimetrica{
 	public void secuencial(){
 		Coloreo col = new Coloreo(this);
 		col.mezclar();
+		col.limpiarColores();
 		cantColores = col.colorear(this);
 		//colores = col.getColores();
 		sumarColoresTotales(cantColores, 1);
@@ -108,6 +109,7 @@ public class GrafoNDNP extends MatrizSimetrica{
 	public void welshPowell(){
 		Coloreo col = new Coloreo(this);
 		//col.mezclar();
+		col.limpiarColores();
 		col.ordenMayorAMenor();
 		cantColores = col.colorear(this);
 		//colores = col.getColores();
@@ -117,6 +119,7 @@ public class GrafoNDNP extends MatrizSimetrica{
 	public void matula(){
 		Coloreo col = new Coloreo(this);
 		//col.mezclar();
+		col.limpiarColores();
 		col.ordenMenorAMayor();
 		cantColores = col.colorear(this);
 		//colores = col.getColores();
